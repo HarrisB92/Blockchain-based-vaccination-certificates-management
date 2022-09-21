@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% block content %}
+<br>
+<br>
+Admin account: {{ adminaccount }}
+
+
+<form method="POST" action="{{ url_for('admin') }}" enctype="multipart/form-data">
+ {{ registerform.csrf_token }}
+    <table align="center">
+        <tr>
+            <td> {{ registerform.ethaddress.label }} :</td>
+            <td> {{ registerform.ethaddress }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform.details.label }} :</td>
+            <td> {{ registerform.details }} </td>
+        </tr>
+        <td>
+            <div class="acction_btn">
+                  <input class="buttons" type="submit" value="Register Health-center">
+            </div>
+        </td>
+    </table>
+
+
+</form>
+
+{% if t1 %}
+<br> Success!!!!
+{% endif %}
+
+<br>
+<br>
+<br>
+<form method="POST" action="{{ url_for('admin') }}" enctype="multipart/form-data">
+ {{ registerform.csrf_token }}
+    <table align="center">
+        <tr>
+            <td> {{ registerform6.time.label }} :</td>
+            <td> {{ registerform6.time }} </td>
+        </tr>
+        <td>
+            <div class="acction_btn">
+                  <input class="buttons" type="submit" value="Set suspension period">
+            </div>
+        </td>
+    </table>
+</form>
+<br>
+<br>
+<br>
+
+
+<form method="POST" action="{{ url_for('admin') }}" enctype="multipart/form-data">
+ {{ registerform.csrf_token }}
+    <table align="center">
+        <tr>
+            <td> {{ registerform8.revocation_date.label }} :</td>
+            <td> {{ registerform8.revocation_date }} </td>
+        </tr>
+        <td>
+            <div class="acction_btn">
+                  <input class="buttons" type="submit" value="Revoke Certificates">
+            </div>
+        </td>
+    </table>
+</form>
+<table align="center">
+    {% if t9 %}
+        <tr>
+            <td> Looking for certificates issued before {{ date }}....  {{count}} certificate(s) found and revoked.  </td>
+        </tr>
+    {% endif %}
+    {% if t10 %}
+        <tr>
+            <td> Please fill the date-time form correcly...  </td>
+        </tr>
+    {% endif %}
+</table>
+
+
+{% endblock %}

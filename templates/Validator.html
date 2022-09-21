@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<br>
+<br>
+<form  method="post" enctype="multipart/form-data">
+        <tr>
+            <td> {{ registerform4.hash_to_validate.label }} :</td>
+            <td> {{ registerform4.hash_to_validate }} </td>
+        </tr>
+  <input type="submit" value="Submit">
+</form>
+
+<form  method="post" enctype="multipart/form-data">
+    <table align="center">
+        <tr>
+            <td> {{ registerform7.user_name.label }} :</td>
+            <td> {{ registerform7.user_name }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.eth_address.label }} :</td>
+            <td> {{ registerform7.eth_address }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.vaccine_type.label }} :</td>
+            <td> {{ registerform7.vaccine_type }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.date.label }} :</td>
+            <td> {{ registerform7.date }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.health_center.label }} :</td>
+            <td> {{ registerform7.health_center }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.operator.label }} :</td>
+            <td> {{ registerform7.operator }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform7.cert_id.label }} :</td>
+            <td> {{ registerform7.cert_id }} </td>
+        </tr>
+        <tr>
+           <td> <input type="submit" value="Calculate Certificate Hash"> </td>
+        </tr>
+
+    </table>
+</form>
+<table align="center">
+    {% if calc_hash %}
+        <tr>
+           <td> The hash of your certificate is: {{cert_hash}} </td>
+        </tr>
+    {% endif %}
+</table>
+
+
+{% if hashNotExists %}
+<br>
+<br>
+<br>
+<h5> This hash does not exist in the blockchain. It is
+    <font color ="#bc0101">
+         NOT VALID
+    </font>
+</h5>
+{% endif %}
+
+{% if t3 %}
+<br>
+<br>
+<br>
+<pre class="tab"> Time:                  From:                                               To:</pre>
+
+{% for i in events_num %}
+<form  class="validation" method="post" enctype="multipart/form-data">
+        <tr>
+            <td> {{ time_list[i] }} :</td>
+            <td> {{ address_from_list[i] }}   ====>   </td>
+            <td> {{ address_to_list[i] }} </td>
+        </tr>
+</form>
+{% endfor %}
+{% endif %}
+
+
+
+
+
+{% if valid %}
+<h2> The certificate is
+    <font
+          color="#2baf03">
+            VALID
+    </font>
+</h2>
+{% endif %}
+
+{% if invalid %}
+<h2> The certificate is
+    <font color ="#bc0101">
+         NOT VALID
+    </font>
+</h2>
+{% endif %}
+
+{% endblock %}

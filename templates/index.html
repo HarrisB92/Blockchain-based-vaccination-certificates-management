@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<title> SafeCert</title>
+
+<head>
+    <style>
+           .background {
+               background-color: #f3f2ed;
+            }
+          div.buttons {
+            margin-left: 0px;
+            display: inline;
+            padding: 1px;
+            background-color: #f3f2ed;
+            font-size: 20px;
+
+            }
+            .buttons :active {
+                text-decoration: underline;
+            }
+            form.main {
+                background-color: #e6dac4;
+                margin-top: 100px;
+
+        }
+        form.validation {
+            background-color: #e6dac4;
+
+        }
+
+        div.upright {
+            text-align: right;
+            background-color: #a79c87;
+            height : 30px ;
+            font-size: 20px;
+        }
+
+        .text_caligraphic {
+            font-family: 'Brush Script MT', cursive;
+            }
+
+        }
+        a:link {
+              text-decoration: none;
+              background-color: #fde1a9;
+                color: black;
+
+            }
+
+            a:visited {
+              text-decoration: none;
+            }
+
+            a:hover {
+              text-decoration: underline;
+              background-color: #fba902;
+              font-size:120%;
+            }
+
+            a:active {
+              text-decoration: underline;
+            }
+
+    </style>
+
+    <meta charset="UTF-8">
+    <title>SafeCerts</title>
+    <title> My Etheum Daap</title>
+
+
+
+</head>
+<body class="background">
+
+
+   <div class="upright"><upright> contract: {{contractaddress}}</upright></div>
+   <div class="buttons" >
+        <a href="{{ url_for('index') }}"  target="_self">Home</a>
+        <a href="{{ url_for('admin') }}" style="margin-left: 10px;" target="_self">Admin</a>
+        <a href="{{ url_for('Healthcare') }}" style="margin-left: 10px;" target="_self">Healthcare Centers</a>
+       <a href="{{ url_for('user') }}" style="margin-left: 10px;" target="_self">User</a>
+         <a href="{{ url_for('validator') }}" style="margin-left: 10px;" target="_self">Validator</a>
+   </div>
+<br>
+
+{% block content%} {% endblock %}
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block content %}
+<br>
+<br>
+<form method="POST" action="{{ url_for('user') }}" enctype="multipart/form-data">
+    <table align="center">
+        <tr>
+            <td> {{ registerform9.user_address.label }} :</td>
+            <td> {{ registerform9.user_address }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform9.user_passphrase.label }} :</td>
+            <td> {{ registerform9.user_passphrase }} </td>
+        </tr>
+        <td>
+            <div class="acction_btn">
+                  <input class="buttons" type="submit" value="Sign timestamp">
+            </div>
+        </td>
+    </table>
+</form>
+
+<table align="center">
+    {% if t11 %}
+        <tr>
+            <td> wrong credentials...  </td>
+        </tr>
+    {% endif %}
+</table>
+<table align="center">
+    {% if sig_ok %}
+        <tr>
+            <td> sigrature: {{ signature }}  </td>
+        </tr>
+        <tr>
+            <td> message hash: {{ hex_message_hash }}  </td>
+        </tr>
+    {% endif %}
+</table>
+
+{% endblock %}

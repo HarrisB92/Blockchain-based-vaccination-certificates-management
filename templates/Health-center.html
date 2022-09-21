@@ -1,0 +1,146 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<br>
+<br>
+<h4>Generate a new address</h4>
+<form  method="post" enctype="multipart/form-data">
+        <tr>
+            <td> {{ registerform2.newpass.label }} :</td>
+            <td> {{ registerform2.newpass }} </td>
+        </tr>
+  <input type="submit" value="Submit">
+</form>
+
+<br>
+{% if t4 %}
+Your new address is:  {{newaccount}}
+{% endif %}
+
+
+
+<form method="GET" enctype="multipart/form-data">
+ {{ registerform1.csrf_token }}
+    <table align="center">
+        <tr>
+            <td> {{ registerform1.ethaddress.label }} :</td>
+            <td> {{ registerform1.ethaddress }} </td>
+        </tr>
+    </table>
+</form>
+
+<form class="main"  method="POST" enctype="multipart/form-data">
+ {{ registerform1.csrf_token }}
+    <h3>Register Certificate</h3>
+    <table align="center">
+        <tr>
+            <td> {{ registerform3.address_from.label }} :</td>
+            <td> {{ registerform3.address_from }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform3.address_to.label }} :</td>
+            <td> {{ registerform3.address_to }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform3.cert_hash.label }} :</td>
+            <td> {{ registerform3.cert_hash }} </td>
+        </tr>
+         <tr>
+            <td> {{ registerform3.personel_signature.label }} :</td>
+            <td> {{ registerform3.personel_signature }} </td>
+        </tr>
+         <tr>
+            <td> {{ registerform3.passphrase.label }} :</td>
+            <td> {{ registerform3.passphrase }} </td>
+        </tr>
+        <tr>
+            <td>
+            <input class="buttons" type="submit" value="Register Cert">
+                {% if notapproved %}
+                   <h5> You are not an approved Healthcare Center. You cannot issue certificates... </h5>
+                {% endif %}
+                {% if t2 %}
+                   <h5> Wrong credentials. Try again... </h5>
+                {% endif %}
+                {% if t3 %}
+                    <h4>The Hash of the certificate has successfully stored in the blockchain! </h4>
+                {% endif %}
+                {% if not_unique %}
+                    <h4> This certificate already exists. You cannot reissue it.</h4>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</form>
+
+<form class="main"  method="POST" enctype="multipart/form-data">
+ {{ registerform1.csrf_token }}
+    <h3>Suspend Certificate</h3>
+    <table align="center">
+        <tr>
+            <td> {{ registerform5.user_address_from.label }} :</td>
+            <td> {{ registerform5.user_address_from }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform5.healthcare_address_to.label }} :</td>
+            <td> {{ registerform5.healthcare_address_to }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform5.cert_hash.label }} :</td>
+            <td> {{ registerform5.cert_hash }} </td>
+        </tr>
+         <tr>
+            <td> {{ registerform5.user_signature.label }} :</td>
+            <td> {{ registerform5.user_signature }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform5.hash_of_signed_message.label }} :</td>
+            <td> {{ registerform5.hash_of_signed_message }} </td>
+        </tr>
+         <tr>
+            <td> {{ registerform5.personel_signature.label }} :</td>
+            <td> {{ registerform5.personel_signature }} </td>
+        </tr>
+        <tr>
+            <td> {{ registerform5.passphrase.label }} :</td>
+            <td> {{ registerform5.passphrase }} </td>
+        </tr>
+        <tr>
+            <td>
+            <input class="buttons" type="submit" value="Suspend Cert">
+                {% if notapproved2 %}
+                   <h5>You are not an approved Healthcare Center. You cannot issue certificates... </h5>
+                {% endif %}
+
+                {% if t5 %}
+                   <h5>Wrong credentials. Try again... </h5>
+                {% endif %}
+
+                {% if invalid_signature %}
+                    <h5>The users signature is invalid...  </h5>
+                    <h5>To suspend a signature user's consent is required. </h5>
+                {% endif %}
+
+                {% if t6 %}
+                    <h4>Succesful certificate suspension! </h4>
+                {% endif %}
+                {% if is_unique %}
+                    <h4>The certificate you are trying to suspend does not exist.</h4>
+                {% endif %}
+                {% if false_awnership %}
+                    <h4>This certificate does not belong to this person!</h4>
+                {% endif %}
+                {% if old_sig %}
+                    <h4>User's signature is valid for 2 minutes only...</h4>
+                {% endif %}
+                {% if suspension_time_not_set %}
+                    <h4>Suspension time is not set...</h4>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+{% endblock %}
